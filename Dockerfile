@@ -4,6 +4,8 @@ LABEL maintainer=antoinethebuilder
 ARG TARGETPLATFORM
 ARG BUILDPLATFORM
 
+ENV SSL_CERT_DIR=/etc/ssl/certs
+
 ARG USER=analyst
 RUN apk add --no-cache --update sudo git build-base
 
