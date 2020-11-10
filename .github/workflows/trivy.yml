@@ -17,12 +17,12 @@ jobs:
 
       - name: Build an image from Dockerfile
         run: |
-          docker build -t antoinethebuilder/base .
+          docker build -t antoinethebuilder/vtcli .
 
       - name: Run Trivy vulnerability scanner
         uses: aquasecurity/trivy-action@master
         with:
-          image-ref: 'antoinethebuilder/base'
+          image-ref: 'antoinethebuilder/vtcli'
           format: 'template'
           template: '@/contrib/sarif.tpl'
           output: 'trivy-results.sarif'

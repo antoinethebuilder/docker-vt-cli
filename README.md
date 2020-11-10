@@ -1,12 +1,11 @@
 <div align="center">
     <h1 align="center">Build & Push Docker Images</h1>
     <p style="line-height: 10px;">Use this template to automate your docker images.</p>
-    <img alt="Docker Pulls" src="https://img.shields.io/docker/pulls/antoinethebuilder/base?style=flat-square">
-     <a href="https://hub.docker.com/r/antoinethebuilder/base/"><img src="https://img.shields.io/docker/stars/antoinethebuilder/base.svg?style=flat-square&logo=docker" alt="Docker Stars"></a><br>
-     <img alt="GitHub Workflow Status" src="https://img.shields.io/github/workflow/status/antoinethebuilder/build-push-docker/build-push-docker?style=flat-square">
-    <img alt="GitHub" src="https://img.shields.io/github/license/antoinethebuilder/build-push-docker?style=flat-square">
+    <img alt="Docker Pulls" src="https://img.shields.io/docker/pulls/antoinethebuilder/docker-vt-cli?style=flat-square">
+     <a href="https://hub.docker.com/r/antoinethebuilder/docker-vt-cli/"><img src="https://img.shields.io/docker/stars/antoinethebuilder/docker-vt-cli.svg?style=flat-square&logo=docker" alt="Docker Stars"></a><br>
+     <img alt="GitHub Workflow Status" src="https://github.com/antoinethebuilder/docker-vt-cli/workflows/Build%20and%20Push%20image/badge.svg?style=flat-square">
+    <img alt="GitHub" src="https://img.shields.io/github/license/antoinethebuilder/docker-vt-cli?style=flat-square">
 </div>
-
 
 # Information
 
@@ -26,7 +25,7 @@ The image contains a small set of packages to be used for general purposes.
 # Platforms
 Support for multiple platforms for this image are available:
 
-    $ docker run --rm mplatform/mquery antoinethebuilder/base:latest
+    $ docker run --rm mplatform/mquery antoinethebuilder/vtcli:latest
     Image: antoinethebuilder/base:latest
     * Manifest List: Yes
     * Supported platforms:

@@ -10,7 +10,7 @@ on:
       - '**.md'
 
 env:
-  CONTAINER_NAME: ${{ secrets.DOCKER_USERNAME }}/base
+  CONTAINER_NAME: ${{ secrets.DOCKER_USERNAME }}/vtcli
 
 jobs:
   main:
