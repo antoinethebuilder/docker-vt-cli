@@ -1,12 +1,19 @@
-FROM --platform=${TARGETPLATFORM:-linux/amd64} alpine:latest
+FROM --platform=${TARGETPLATFORM:-linux/amd64} golang:alpine
+LABEL maintainer=antoinethebuilder
 
 ARG TARGETPLATFORM
 ARG BUILDPLATFORM
-RUN printf "I am running on ${BUILDPLATFORM:-linux/amd64}, building for ${TARGETPLATFORM:-linux/amd64}\n$(uname -a)\n"
 
-LABEL maintainer="antoinethebuilder"
+ARG USER=analyst
+RUN apk add --no-cache --update sudo git build-base
 
-RUN apk --update --no-cache add p7zip python3 py3-pip py3-virtualenv jq curl git \
-  && rm -rf /var/cache/apk/* /tmp/*
+RUN adduser -D $USER \
+        && echo "$USER ALL=(ALL) NOPASSWD: ALL" > /etc/sudoers.d/$USER \
+        && chmod 0440 /etc/sudoers.d/$USER
 
-CMD [ "echo", "Just run any commands you feel like running!" ]
+RUN go get -d github.com/VirusTotal/vt-cli/vt && cd /go/src/github.com/VirusTotal/vt-cli && make install
+
+USER $USER
+WORKDIR /opt
+
+ENTRYPOINT [ "vt" ]
