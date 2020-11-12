@@ -15,14 +15,14 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v2
 
-      - name: Build an image from Dockerfile
+      - name: Pull image from Docker Hub
         run: |
-          docker build -t antoinethebuilder/vtcli .
+          docker pull antoinethebuilder/vt-cli
 
       - name: Run Trivy vulnerability scanner
         uses: aquasecurity/trivy-action@master
         with:
-          image-ref: 'antoinethebuilder/vtcli'
+          image-ref: 'antoinethebuilder/vt-cli'
           format: 'template'
           template: '@/contrib/sarif.tpl'
           output: 'trivy-results.sarif'
