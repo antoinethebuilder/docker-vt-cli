@@ -4,7 +4,7 @@
     <img alt="Docker Pulls" src="https://img.shields.io/docker/pulls/antoinethebuilder/vt-cli?style=flat-square">
     <img alt="Docker Image Size (latest by date)" src="https://img.shields.io/docker/image-size/antoinethebuilder/vt-cli?style=flat-square">
     <img alt="GitHub last commit" src="https://img.shields.io/github/last-commit/antoinethebuilder/docker-vt-cli?style=flat-square">
-    <img alt="GitHub" src="https://img.shields.io/github/license/antoinethebuilder/docker-vt-cli?style=flat-square">
+    <a href="https://gitlab.com/antoinethebuilder/vt-cli/-/commits/master"><img alt="pipeline status" src="https://gitlab.com/antoinethebuilder/vt-cli/badges/master/pipeline.svg?style=flat-square" /></a>
 </div>
 
 # Information
