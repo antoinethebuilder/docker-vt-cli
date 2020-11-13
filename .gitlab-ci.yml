@@ -6,21 +6,38 @@ stages:
   - test
 
 build:
-  image: docker:stable
+  image: docker:19.03.11
   stage: build
 
   variables:
     IMAGE: $CI_REGISTRY_IMAGE:$CI_COMMIT_SHORT_SHA
-    PLATFORMS: linux/amd64,linux/arm/v6,linux/arm/v7,linux/arm64,linux/386,linux/ppc64le,linux/s390x
+    PLATFORMS: "linux/amd64,linux/arm/v6,linux/arm/v7,linux/arm64,linux/386,linux/ppc64le,linux/s390x"
     DOCKER_HOST: tcp://docker:2375/
     DOCKER_DRIVER: overlay2
+    DOCKER_TLS_CERTDIR: "" # set this to disable TLS (default on docker 19.03+)
+    DOCKER_CLI_EXPERIMENTAL: enabled
 
   services:
-    - docker:dind
-
+    - name: docker:19.03.11-dind
+      command: ["--experimental"] 
+  
   script:
+    # Installing dependencies
+    - apk add --no-cache curl jq
+    - docker version
+    - mkdir -p ~/.docker/cli-plugins/
+    # Download latest buildx bin from github
+    - BUILDX_LATEST_BIN_URI=$(curl -s -L https://github.com/docker/buildx/releases/latest | grep 'linux-amd64' | grep 'href' | sed 's/.*href="/https:\/\/github.com/g; s/amd64".*/amd64/g')
+    - curl -s -L ${BUILDX_LATEST_BIN_URI} -o ~/.docker/cli-plugins/docker-buildx
+    - chmod a+x ~/.docker/cli-plugins/docker-buildx
+    # Get and run the latest docker/binfmt tag to use its qemu parts
+    - BINFMT_IMAGE_TAG=$(curl -s https://registry.hub.docker.com/v2/repositories/docker/binfmt/tags | jq '.results | sort_by(.last_updated)[-1].name' -r)
+    - docker run --rm --privileged docker/binfmt:${BINFMT_IMAGE_TAG}
+    - docker buildx create --name thebuilder
+    - docker buildx use thebuilder
     - docker login -u "$CI_REGISTRY_USER" -p "$CI_REGISTRY_PASSWORD"
-    - docker buildx create --use
+    # Build and push image
+    - docker buildx create --platform  --name container-builder --use
     - docker buildx build --push --platform $PLATFORMS -t $IMAGE .
 
 include:
