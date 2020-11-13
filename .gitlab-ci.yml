@@ -19,4 +19,4 @@ build:
     - docker push $IMAGE
 
 include:
-  - template: ./cicd/secret-detection.gitlab-ci.yml 
+  - local: /cicd/secret-detection.gitlab-ci.yml
