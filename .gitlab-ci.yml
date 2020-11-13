@@ -37,7 +37,6 @@ build:
     - docker buildx use thebuilder
     - docker login -u "$CI_REGISTRY_USER" -p "$CI_REGISTRY_PASSWORD"
     # Build and push image
-    - docker buildx create --platform $PLATFORM --name container-builder --use
     - docker buildx build --push --platform $PLATFORMS -t $IMAGE .
 
 include:
