@@ -11,7 +11,7 @@ build:
 
   variables:
     IMAGE: $CI_REGISTRY_IMAGE:$CI_COMMIT_SHORT_SHA
-    PLATFORMS: "linux/amd64,linux/arm/v6,linux/arm/v7,linux/arm64,linux/386,linux/ppc64le,linux/s390x"
+    PLATFORMS: "linux/amd64,linux/arm/v6,linux/arm/v7,linux/arm64,linux/386"
     DOCKER_HOST: tcp://docker:2375/
     DOCKER_DRIVER: overlay2
     DOCKER_TLS_CERTDIR: "" # set this to disable TLS (default on docker 19.03+)
