@@ -11,7 +11,7 @@ build:
   services:
     - docker:19.03.12-dind
   variables:
-    IMAGE: $CI_REGISTRY_IMAGE:$CI_COMMIT_SHA
+    IMAGE: $CI_REGISTRY_IMAGE:$CI_COMMIT_SHORT_SHA
   script:
     - docker info
     - docker login -u "$CI_REGISTRY_USER" -p "$CI_REGISTRY_PASSWORD"
